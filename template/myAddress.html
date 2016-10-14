@@ -1,0 +1,86 @@
+<div class="container" >
+
+    <!-- pass in the variable if our form is valid or invalid -->
+    <form class="well form-horizontal"
+          name="userForm" ng-submit="submitForm(userForm.$valid)"
+          novalidate>
+        <fieldset>
+            <!-- Form Name -->
+            <legend>Your Address:</legend>
+
+            <!-- AddressLine1 -->
+            <div class="form-group" ng-class="{ 'has-error' : userForm.addLine1.$invalid && !userForm.addLine1.$pristine }">
+                <label class="col-md-4 control-label">Address*</label>
+                <div class="col-md-8 inputGroupContainer">
+                    <div class="input-group">
+                        <input type="text" name="addLine1" class="form-control"
+                               placeholder="Address"
+                               ng-model="address.addLine1"
+                               required>
+                    </div>
+                    <p ng-show="userForm.addLine1.$invalid && !userForm.addLine1.$pristine" class="help-block"> Address is required.</p>
+                </div>
+            </div>
+            <!-- Apt No -->
+            <div class="form-group" ng-class="{ 'has-error' : userForm.aptNo.$invalid && !userForm.aptNo.$pristine }">
+                <label class="col-md-4 control-label">Apt No</label>
+                <div class="col-md-8 inputGroupContainer">
+                    <div class="input-group">
+                        <input type="text" name="aptNo" class="form-control"
+                               placeholder="Apt No"
+                               ng-model="address.aptNo">
+                    </div>
+                </div>
+            </div>
+            <!-- City -->
+            <div class="form-group" ng-class="{ 'has-error' : userForm.city.$invalid && !userForm.city.$pristine }">
+                <label class="col-md-4 control-label">City*</label>
+                <div class="col-md-8 inputGroupContainer">
+                    <div class="input-group">
+                        <input type="text" name="city" class="form-control"
+                               placeholder="City"
+                               ng-model="address.city" required>
+                    </div>
+                    <p ng-show="userForm.city.$invalid && !userForm.city.$pristine" class="help-block">City is required.</p>
+                </div>
+            </div>
+
+            <!-- State -->
+            <div class="form-group" ng-class="{ 'has-error' : userForm.state.$invalid && !userForm.state.$pristine }">
+                <label class="col-md-4 control-label">State*</label>
+                <div class="col-md-8 selectContainer">
+                    <div class="input-group">
+                        <select class="form-control selectpicker" ng-model="address.state" ng-options="o for o in options"
+                                required>
+                            <option value="" >Please select your state</option>
+                        </select>
+                    </div>
+                    <p ng-show="userForm.state.$invalid && !userForm.state.$pristine" class="help-block">State is required.</p>
+                </div>
+            </div>
+
+            <!-- Zip Code -->
+            <div class="form-group" ng-class="{ 'has-error' : userForm.zipCode.$invalid && !userForm.zipCode.$pristine }">
+                <label class="col-md-4 control-label">Zip Code*</label>
+                <div class="col-md-8 inputGroupContainer">
+                    <div class="input-group">
+                        <input type="text" name="zipCode" class="form-control"
+                               placeholder="20002"
+                               ng-model="address.zipCode"
+                               ng-pattern =/^(\d{5}-\d{4}|\d{5})$ required>
+                    </div>
+                    <p ng-show="userForm.zipCode.$invalid && !userForm.zipCode.$pristine" class="help-block">Zip code should be 5 digits</p>
+                </div>
+            </div>
+            <!-- Submit -->
+
+            <label class="col-md-4 control-label"></label>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid"
+                        ng-click="confirmAddr(address)">Confirm
+                </button>
+            </div>
+        </fieldset>
+    </form>
+
+</div>

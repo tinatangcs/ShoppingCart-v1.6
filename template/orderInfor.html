@@ -1,0 +1,90 @@
+<!-- SHOW DATA FROM INPUTS AS THEY ARE BEING TYPED -->
+<div style="padding-top:30px; padding-left:30px; padding-right:30px;">
+    <h2>1.Shipping Address</h2>
+
+        <div class="row">
+            <div class="col-xs-6">{{address.addLine1}}</div>
+        </div>
+        <div class="row">
+
+            <div class="col-xs-6">{{address.city}}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">{{address.state}}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">{{address.zipCode}}</div>
+        </div>
+
+
+
+
+    <h2>2.Review your Items</h2>
+    <div style="padding-left:30px;">
+        <div class = "row">
+            <table class="table table-bordered">
+                <tr>
+                    <th>Item</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                </tr>
+                <tr ng-repeat="x in cart.items">
+                    <td>{{ $index + 1 }}</td>
+                    <td ng-bind="x.name"></td>
+                    <td ng-bind="x.price | currency"></td>
+                    <td ng-bind="x.qty"></td>
+                </tr>
+            </table>
+        </div>
+
+
+        <div class="row">
+            <div class="col-xs-3">Choose your delivery</div>
+            <div class="col-xs-6">
+                <select class="form-control selectpicker"  ng-model="shippingSelected" ng-options="s for s in shippingOptions"
+                        required>
+                    <option value="" >Please select your shipping</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">SubTotal</div>
+            <div class="col-xs-9">{{subTotal() | number:2 | currency}}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">ExtraCharge</div>
+            <div class="col-xs-9">{{extraCharge() | number:2 | currency}}</div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-3">ShippingFee</div>
+            <div class="col-xs-9">{{getShippingFee()| number:2 | currency}}</div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-3">Estimated tax to be collected: </div>
+            <div class="col-xs-9">{{taxFee() | number:2 | currency}}</div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-3">TotalCost</div>
+            <div class="col-xs-9">{{total() | number:2| currency}}</div>
+        </div>
+    </div>
+
+    <br>
+
+    <div id="cart-bottom-panel">
+        <div class="buttons-panel">
+            <div class="button-column">
+                <a class="btn btn-success" ui-sref="store" ng-click=submitCart("Nina")>Place your order </a>
+            </div>
+            <span class="pull-right">
+            <div class="button-column">
+                <a class="btn btn-default" ui-sref="store" >Back to Store</a>
+            </div>
+        </span>
+        </div>
+    </div>
+</div>

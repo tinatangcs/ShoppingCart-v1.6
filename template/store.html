@@ -1,0 +1,81 @@
+<div class="row" >
+    <div id="main-container" class="col-xs-12 col-sm-8 col-md-6 col-lg-6"  >
+        <h1>Furniture</h1>
+        <div id="shopping-cart">
+
+            <div class="cart-item" ng-repeat="p in products"  >
+                <a href=" "><img class="item-main-icon" src="images/cart-image.png"/></a>
+                <div class="basic-elements-container">
+                    <a class="item-title" href="">{{p.name}}</a>
+                    <p class="item-description">{{p.price | currency}}</p>
+                </div>
+                <div class="mobile-menu-container"></div>
+                <div class="control-panel">
+                    <div class="add-link">
+                        <a  ng-click="addItem(p.name,p.price,1)"><span class="pull-right"><img src="images/add-link.gif"/></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="banner-panel" class="col-xs-12 col-sm-4 col-md-4 col-lg-4" >
+        <div ng-show = "!showCart()">
+            <h1 style ="text-align: center">Your cart is empty</h1>
+            </div>
+
+
+        <div ng-show = "showCart()">
+            <h1 style = "text-align: center">Your cart</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th class="col-sm-1 col-md-1">Product</th>
+                    <th class="col-sm-1 col-md-1">Quantity</th>
+                    <th class="col-sm-1 col-md-1">Price</th>
+                    <th class="col-sm-1 col-md-1"></th>
+                </tr>
+                </thead>
+                <tr ng-repeat="i in cart.items" ng-show="getDisappear(i.qty)">
+                    <td class="col-sm-1 col-md-1">{{i.name}}</td>
+                    <td class="col-sm-1 col-md-1"><input type="number"ng-model="i.qty" required ></td>
+                    <td class="col-sm-1 col-md-1">{{i.price | currency}}</td>
+                    <td class="col-sm-1 col-md-1"><buton type="button" ng-click = "removeItem($index)">
+                        <span class="pull-right"><img src="images/remove-link.gif"/></span></buton></td>
+                </tr>
+
+                <tr>
+                    <td class="col-sm-1 col-md-1"></td>
+                    <td class="col-sm-1 col-md-1"></td>
+                    <td class="col-sm-1 col-md-1">TotalWeight:</td>
+                    <td class="col-sm-1 col-md-1"><span>{{totalWeight() | number:2}}</span></td>
+                </tr>
+
+                <tr>
+                    <td class="col-sm-1 col-md-1"></td>
+                    <td class="col-sm-1 col-md-1"></td>
+                    <td class="col-sm-1 col-md-1">SubTotal:</td>
+                    <td class="col-sm-1 col-md-1"><span>{{subTotal() | number:2 | currency}}</span></td>
+                </tr>
+
+
+            </table>
+            <div id="cart-bottom-panel">
+                <div class="buttons-panel">
+                    <div class="button-column">
+                        <button class="btn btn-danger" ng-click="clear()">Clear</button>
+                    </div>
+                    <span class="pull-right">
+                    <div class="button-column">
+                        <a class="btn btn-primary" ui-sref="address">Checkout</a>
+                    </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>
